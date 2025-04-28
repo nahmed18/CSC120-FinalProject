@@ -16,14 +16,14 @@ public class GameLoop{
         System.out.println("Hi " + userName + "! Welcome to Hotel Mania.");
 
         //opening where Shahrin, Nazifa, and Caitlyn explain the plot of the game
-        System.out.print("Press Enter to continue" );
+        System.out.print("Press Enter to continue ");
         userInput.nextLine();
         System.out.println("******************");
         System.out.println("Shahrin: ..... ");
-        System.out.print("Press Enter to continue");
+        System.out.print("Press Enter to continue ");
         userInput.nextLine();
         System.out.println("Nazifa: ....");
-        System.out.print("Press Enter to continue");
+        System.out.print("Press Enter to continue ");
         userInput.nextLine();
         System.out.println("Caitlyn: .....");
         System.out.println("******************");
