@@ -43,7 +43,11 @@ public class GameLoop{
         System.out.println("Caitlyn: Great choice! Welcome to " + hotelName + " — the future best hotel in town!");
         System.out.println("******************");
 
+
         //
+        // do {
+
+        // } while (stillPlaying);
         // do {
 
         // } while (stillPlaying);
