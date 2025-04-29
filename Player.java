@@ -6,7 +6,8 @@ public class Player {
      //Attributes 
      private String name; 
      private double money; 
-     private int chances; 
+     private int chances;
+     protected int activeFloor = 1; //default value indicating player is in lobby 
  
  
      //Constructor receives name from GameLoop class
@@ -43,23 +44,31 @@ public class Player {
 
    //   }
 
-   //   public int goToRoom(int roomNumber){
-
+     public int goToRoom(int roomNum){
+   //    if (this.activeFloor == -1) {
+   //       throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
    //   }
+     if (floorNum < 1 || floorNum > this.nFloors) {
+         throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors + ".");
+     }
+     System.out.println("You are now on floor #" + roomNum + " of " + this.name);
+     this.activeFloor = roomNum;
+     }
 
-   //   public void goToLobby(){
-
-   //   }
+     public void goToLobby(){
+      System.out.println("You are now in the lobby.");
+      this.activeFloor = 1;
+     }
 
      public String build(String buildingName){
       if (buildingName.equals("Cafe") && money >= 100){
-         //create Cafe instance
+         //create Cafe instance Cafe hotelCafe = new Cafe(cafeName);
       }
       else if (buildingName.equals("Library") && money >= 150){
-         //create Library instance
+         //create Library instance Library hotelLibrary = new Library(libName);
       }
       else if (buildingName.equals("Pool") && money >= 200){
-         //create Pool instance
+         //create Pool instance Pool hotelPool = new Pool(poolName);
       }
      }
 
