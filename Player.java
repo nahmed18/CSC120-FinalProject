@@ -28,13 +28,14 @@ public class Player {
  
  
  
-   //   public double spendMoney(double amount){
+     public double spendMoney(double amount){
+      //remove this and spend money in build method?
+     }
 
-   //   }
-
-   //   public double earnMoney(double amount){
-
-   //   }
+     public double earnMoney(double amount){
+         earn money via
+         
+     }
 
    //   public String grabObject(String object){
 
@@ -60,16 +61,35 @@ public class Player {
       this.activeFloor = 1;
      }
 
-     public String build(String buildingName){
-      if (buildingName.equals("Cafe") && money >= 100){
-         //create Cafe instance Cafe hotelCafe = new Cafe(cafeName);
+     public void build(String buildingName){
+      if (buildingName.equals("Cafe") && money < 100){
+         throw new RuntimeException("You do not have enough money to build a cafe.");
+         //lose --> hotel is in debt?
       }
-      else if (buildingName.equals("Library") && money >= 150){
-         //create Library instance Library hotelLibrary = new Library(libName);
+      //create Cafe instance Cafe hotelCafe = new Cafe(cafeName);
+      //you created a cafe!
+      this.money = money - 100;
+      System.out.println("You now have $ " + this.money + " remaining.");
+
+      if (buildingName.equals("Library") && money < 150){
+         throw new RuntimeException("You do not have enough money to build a library.");
+         //lose --> hotel is in debt?
+
       }
-      else if (buildingName.equals("Pool") && money >= 200){
-         //create Pool instance Pool hotelPool = new Pool(poolName);
+      //create Library instance Library hotelLibrary = new Library(libName);
+      //you created a library!
+      this.money = money - 150;
+      System.out.println("You now have $ " + this.money + " remaining.");
+
+      if (buildingName.equals("Pool") && money < 200){
+         throw new RuntimeException("You do not have enough money to build a pool.");
+         //lose --> hotel is in debt?
+
       }
+      //create Pool instance Pool hotelPool = new Pool(poolName);
+      //you created a pool!
+      this.money = money - 200;
+      System.out.println("You now have $ " + this.money + " remaining.");
      }
 
      public void loseChance(){
