@@ -6,7 +6,7 @@ public class HotelBuilding{
     public String name;
     public String address;
     public int floors;
-    private List<Room> rooms; 
+    private List<Room> rooms;
 
     public HotelBuilding(String name, String address, int floors) {
         this.name = name;
@@ -27,7 +27,7 @@ public class HotelBuilding{
             rooms.add(new Room(i, 2, false));
         }
 
-        //rooms 9-11 have a capacity of 3,4,5 
+        //rooms 9-11 have a capacity of 3,4,5
         rooms.add(new Room(9, 3, false));
         rooms.add(new Room(10, 4, false));
         rooms.add(new Room(11, 5, false));

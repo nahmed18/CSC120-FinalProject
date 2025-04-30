@@ -6,7 +6,7 @@ public class Guest{
     String pets;
     String kids;
     String description;
-    String note; //this inidcates highs and lows of a guest
+    String note; //this indicates highs and lows of a guest
     String satisfactionLevel;
 
     public Guest(String name, int age, String pets, String kids, String description, String note) {
@@ -23,7 +23,7 @@ public class Guest{
         // if (this.satisfactionLevel.equals)
     }
 
-     public void displayGuest() {
+    public void displayGuest() {
         System.out.println("-------------------------------------------------");
         System.out.println("Guest(s): " + name);
         System.out.println("Age: " + age);
