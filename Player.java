@@ -48,7 +48,7 @@ public class Player {
    //    if (this.activeFloor == -1) {
    //       throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
    //   }
-     if (floorNum < 1 || floorNum > this.nFloors) {
+     if (roomNum < 1 || roomNum > this.nRooms) {
          throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors + ".");
      }
      System.out.println("You are now on floor #" + roomNum + " of " + this.name);
