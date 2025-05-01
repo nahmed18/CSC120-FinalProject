@@ -27,7 +27,15 @@ public class Room {
 
     public boolean isOccupied() {
         return isOccupied;
-    } 
+    }
+    
+    public String occupiedStatus() {
+        if (!isOccupied) {
+            return("Yes");
+        } else {
+            return("No");
+        } 
+    }
 
     public void setOccupied(boolean isOccupied) {
         this.isOccupied = isOccupied;
