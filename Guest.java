@@ -1,3 +1,6 @@
+import java.util.Random;
+import java.util.ArrayList;
+
 public class Guest{
     
     //Attributes
@@ -8,8 +11,9 @@ public class Guest{
     String description;
     String note; //this indicates highs and lows of a guest
     String satisfactionLevel;
+    int partySize;
 
-    public Guest(String name, int age, String pets, String kids, String description, String note) {
+    public Guest(String name, int age, String pets, String kids, String description, String note, int partySize) {
         this.name = name;
         this.age = age;
         this.pets = pets;
@@ -17,6 +21,11 @@ public class Guest{
         this.description = description;
         this.note = note;
         this.satisfactionLevel = "😀"; // Initial satisfaction level all guests start off happy
+        this.partySize = partySize;
+    }
+
+    public int getPartySize() {
+        return partySize;
     }
 
     public void decreaseSatisfaction() {
@@ -39,16 +48,16 @@ public class Guest{
         // This is the guest list
         ArrayList<Guest> guestList = new ArrayList<>();
 
-        guestList.add(new Guest("Amelia and Don", 21, "None", "None", "A young couple celebrating their three-year anniversary on a sweet 'bae-cation.' They’re energetic, affectionate, and looking for a cozy getaway spot to make memories.", "Amelia is a bit of a clean freak. You might be called frequently for room cleaning."));
-        guestList.add(new Guest("Sally", 58, "Two cats (one rowdy with sharp claws)", "None", "Freshly single after a messy divorce, Sally is treating herself to luxury... and so are her mischievous cats.", "Risk having furniture damaged and extra room cleaning. Might hear complaints from other guests."));
-        guestList.add(new Guest("Riley, Matthew, Tilda, Tildy, and Sunny", 20, "None", "None", "A lively group of friends backpacking across the nation, extremely high on energy and adventurous.", "Could be noisy guests but might attract other travelers!"));
-        guestList.add(new Guest("Harold, Lina, Sarah, and Walter", 40, "None", "Sarah (19), Walter (4)", "A complicated family trying hard to act like a happy vacation after some serious drama.", "Family drama might spill over, especially between Sarah and Lina."));
-        guestList.add(new Guest("Jasmine", 27, "Small parrot named Kawa", "None", "An aspiring social media influencer documenting her solo journey with her loud parrot.", "Expect constant selfies, live streams, and noise complaints."));
-        guestList.add(new Guest("Ilhan and Lila", 30, "None", "None", "A newlywed couple craving quiet, relaxation, and intimate moments on their honeymoon.", "Easily disturbed if the hotel is too rowdy. Otherwise, very low maintenance."));
-        guestList.add(new Guest("Derek", 35, "None", "None", "Claims to be an entrepreneur but might actually be a scam artist selling 'Make Money Fast' courses.", "Could be on the run. Just rumors though..."));
-        guestList.add(new Guest("Mona", 23, "None", "None", "Fresh from a bad breakup, Mona is determined to make her ex jealous by posting about her fabulous trip.", "Loves the cafe and pool areas; may be demanding about room aesthetics."));
-        guestList.add(new Guest("Olivia and Max", 31, "One nervous chihuahua named Sprinkles", "None", "Celebrating five years together, but Olivia's anxious dog might bark at every little thing.", "Nearby guests might complain about constant barking."));
-        guestList.add(new Guest("Priya and Ethan", 29, "None", "One on the way!", "Just eloped after finding out Priya was pregnant — hiding out from angry family members while snapping dramatic wedding photos.", "Pretty low-maintenance unless someone from their family shows up."));
+        guestList.add(new Guest("Amelia and Don", 21, "None", "None", "A young couple celebrating their three-year anniversary on a sweet 'bae-cation.' They’re energetic, affectionate, and looking for a cozy getaway spot to make memories.", "Amelia is a bit of a clean freak. You might be called frequently for room cleaning.", 2));
+        guestList.add(new Guest("Sally", 58, "Two cats (one rowdy with sharp claws)", "None", "Freshly single after a messy divorce, Sally is treating herself to luxury... and so are her mischievous cats.", "Risk having furniture damaged and extra room cleaning. Might hear complaints from other guests.", 1));
+        guestList.add(new Guest("Riley, Matthew, Tilda, Tildy, and Sunny", 20, "None", "None", "A lively group of friends backpacking across the nation, extremely high on energy and adventurous.", "Could be noisy guests but might attract other travelers!", 5));
+        guestList.add(new Guest("Harold, Lina, Sarah, and Walter", 40, "None", "Sarah (19), Walter (4)", "A complicated family trying hard to act like a happy vacation after some serious drama.", "Family drama might spill over, especially between Sarah and Lina.", 4));
+        guestList.add(new Guest("Jasmine", 27, "Small parrot named Kawa", "None", "An aspiring social media influencer documenting her solo journey with her loud parrot.", "Expect constant selfies, live streams, and noise complaints.", 1));
+        guestList.add(new Guest("Ilhan and Lila", 30, "None", "None", "A newlywed couple craving quiet, relaxation, and intimate moments on their honeymoon.", "Easily disturbed if the hotel is too rowdy. Otherwise, very low maintenance.", 2));
+        guestList.add(new Guest("Derek", 35, "None", "None", "Claims to be an entrepreneur but might actually be a scam artist selling 'Make Money Fast' courses.", "Could be on the run. Just rumors though...", 1));
+        guestList.add(new Guest("Mona", 23, "None", "None", "Fresh from a bad breakup, Mona is determined to make her ex jealous by posting about her fabulous trip.", "Loves the cafe and pool areas; may be demanding about room aesthetics.", 1));
+        guestList.add(new Guest("Olivia and Max", 31, "One nervous chihuahua named Sprinkles", "None", "Celebrating five years together, but Olivia's anxious dog might bark at every little thing.", "Nearby guests might complain about constant barking.", 2));
+        guestList.add(new Guest("Priya and Ethan", 29, "None", "One on the way!", "Just eloped after finding out Priya was pregnant — hiding out from angry family members while snapping dramatic wedding photos.", "Pretty low-maintenance unless someone from their family shows up.", 2));
 
         // Random guest selector
         Random rand = new Random();

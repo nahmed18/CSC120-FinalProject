@@ -21,10 +21,10 @@ public class Player {
          return name;
       }
 
-   //   public void assignGuest(Guest guest, Room room) {
+     public void assignGuest(Guest guest, Room room) {
          //access guest class finding arrived guests in guest arraylist and get size of party then find available room with matching room size to assign guests to
-         
-   //   }
+         Room room = HotelBuilding.getAvailableRoom(guest.getPartySize());
+     }
  
  
  
@@ -32,11 +32,14 @@ public class Player {
    //    //remove this and spend money in build method?
    //   }
 
-     public double earnMoney(double amount) {
-         //check leaving guest's satisfaction level using checkOutGuest method
-         //if guest satisfication is good :D --> $30
-         //if guest is okay :| --> $20
-         //if guest is unsatisfied >:( --> $0
+     public void earnMoney(Guest guest) {
+      if ("😀".equals(guest.satisfactionLevel)) {
+         money += 30;
+      } else if ("😐".equals(guest.satisfactionLevel)) {
+         money += 20;
+      } else { //covers "😠"
+         money += 0;
+      }
          
      }
 
