@@ -20,6 +20,8 @@ public class HotelBuilding{
         return rooms.size(); //returns size of rooms list
     }
 
+    public int getRoomNumber
+
     public void initializeRooms() {
         //rooms 1-4 have a capacity of 1
         for (int i = 1; i <= 4; i++) {
@@ -27,19 +29,19 @@ public class HotelBuilding{
         }
 
         //rooms 5-8 have a capacity of 2
-        for (int i = 5; i <= 8; i++) {
+        for (int i = 5; i <= 7; i++) {
             rooms.add(new Room(i, 2, false));
         }
 
         //rooms 9-11 have a capacity of 3,4,5
-        rooms.add(new Room(9, 3, false));
-        rooms.add(new Room(10, 4, false));
-        rooms.add(new Room(11, 5, false));
+        rooms.add(new Room(8, 3, false));
+        rooms.add(new Room(9, 4, false));
+        rooms.add(new Room(10, 5, false));
     }
 
     public void displayRooms() {
         for (Room room : rooms) {
-            System.out.println("Room Number: " + room.getRoomNumber() + " | Capacity: " + room.getRoomCapacity() + " | Availability: " + room.occupiedStatus());
+            System.out.println("\nRoom Number: " + room.getRoomNumber() + " | Capacity: " + room.getRoomCapacity() + " | Availability: " + room.occupiedStatus());
             if (room.isOccupied) {
                 System.out.println("Guest/s: " + room.getCurrentGuest());
             }
@@ -90,10 +92,10 @@ public class HotelBuilding{
         HotelBuilding Hilton = new HotelBuilding("Hilton", "elm st", 4);
         Hilton.displayRooms();
 
-        Guest Bob = new Guest("Bob", 30, "none", "none", "Is very rude", "YAY", 1);
-        Guest Al = new Guest("Al", 40, "none", "none", "Is very rude", "YAY", 3);
-        Hilton.checkInGuest(Bob, 1);
-        Hilton.checkInGuest(Al, 3);
+        // Guest Bob = new Guest("Bob", 30, "none", "none", "Is very rude", "YAY", 1);
+        // Guest Al = new Guest("Al", 40, "none", "none", "Is very rude", "YAY", 3);
+        // Hilton.checkInGuest(Bob, 1);
+        // Hilton.checkInGuest(Al, 3);
 
 
         Hilton.displayRooms();
