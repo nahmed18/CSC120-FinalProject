@@ -94,7 +94,7 @@ public class GameLoop{
 
                     boolean assigned = false; //this is for room size too small/ doesn't equal number of guests
                     while (!assigned) {
-                        System.out.println("Assigning a room for " + newGuest.name);
+                        System.out.println("\nAssign a room for " + newGuest.name);
                         System.out.println("Party size: " + newGuest.partySize + "\n");
                         hotel.displayRooms();
                         System.out.print("\nEnter room number to assign them: ");
