@@ -6,7 +6,7 @@ public class HotelBuilding{
     public String name;
     public String address;
     public int floors; //floor 1 = lobby, floor 2 = rooms, floor 3 = cafe, floor 4 = library, floor 5 = pool
-    private List<Room> rooms;
+    private ArrayList<Room> rooms;
 
     public HotelBuilding(String name, String address, int floors) {
         this.name = name;
@@ -20,7 +20,9 @@ public class HotelBuilding{
         return rooms.size(); //returns size of rooms list
     }
 
-    public int getRoomNumber
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
 
     public void initializeRooms() {
         //rooms 1-4 have a capacity of 1
@@ -83,7 +85,7 @@ public class HotelBuilding{
 
         Guest guest = room.getCurrentGuest(); 
         System.out.println(guest.name + " has checked out of Room #" + roomNumber);
-        room.setCurrentGuest(null); 
+        room.setCurrentGuest(guest); 
         room.setOccupied(false); 
     }
 

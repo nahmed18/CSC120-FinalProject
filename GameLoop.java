@@ -75,6 +75,10 @@ public class GameLoop{
         System.out.println();
 
         System.out.println("Caitlyn: Great choice! Welcome to " + hotelName + " — the future best hotel in town!");
+        System.out.println("Shahrin: It's your first day so we'll be easy on you! Successfully host 10 guests today and you'll survive!");
+        System.out.println("Nazifa: But, be careful. If you fail to do your tasks, you'll start to lose your guests. You won't be paid for their stay.");
+        System.out.println("Caitlyn: And if you fail three tasks, say bye bye to your new job.");
+        System.out.println("Good luck! 🍀");
         System.out.println("******************");
         
         
@@ -101,7 +105,7 @@ public class GameLoop{
                 String accept = userInput.nextLine().toLowerCase();
 
                 if (accept.equals("yes")) {
-                    arrivingGuests.add(newGuest); 
+                    arrivingGuests.add(newGuest);
                     guestList.remove(newGuest); //removes the guest from initial list 
                     System.out.println("\n" + newGuest.name + " has been accepted!");
 
@@ -136,24 +140,24 @@ public class GameLoop{
 
             //Guests leaving (create a counter when guests leave increase it )
             System.out.println("----GUEST CHECKOUT----");
+            ArrayList<Integer> occupiedRoomNumbers = new ArrayList<>();
 
+            occupiedRoomNumbers.clear();
 
+            for (int i = 0; i<hotel.getRooms().size(); i++) {
+                if (hotel.getRooms().get(i).isOccupied()) {
+                    occupiedRoomNumbers.add(i + 1);
+                }
 
-         
-            if (roomNumber.isOccupied()) {
+                if (!occupiedRoomNumbers.isEmpty()) {
+                    int randomIndex = rand.nextInt(occupiedRoomNumbers.size()); 
+                    int randomRoomNumber = occupiedRoomNumbers.get(randomIndex);
 
-                nGuestsLeft += 1;
-
+                    hotel.checkOutGuest(randomRoomNumber);
+                    nGuestsLeft += 1;
+                    break;
+                }
             }
-            System.out.println("");
-
-
-
-
-
-
-
-
 
 
 

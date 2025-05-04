@@ -5,7 +5,7 @@ public class Guest {
 
     // Guest Attributes
     String name;
-    int age;
+    String age;
     String pets;
     String kids;
     String description;
