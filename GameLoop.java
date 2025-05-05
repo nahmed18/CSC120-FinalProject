@@ -2,16 +2,23 @@ import java.util.Scanner;
 import java.util.Random;
 import java.util.ArrayList;
 
-
+/**
+ * Gameloop class handles the primary game loop and manages the logic for the hotel management. 
+ * It includes, guest arrivals, checkouts, tasks(mini games).
+ */
 public class GameLoop{
 
     //Attributes
-    private static ArrayList<Guest> guestList = new ArrayList<>(); 
-    private static Random rand = new Random();
-    private static int failedTasks = 0;
-    private static int nGuestsLeft = 0;
+    private static ArrayList<Guest> guestList = new ArrayList<>(); //guest list
+    private static Random random = new Random(); //random
+    private static int failedTasks = 0; //counter for failed tasks
+    private static int nGuestsLeft = 0; //counter for guests that have left 
     
 
+    /**
+     * Initializes the guest list with a variety of guests.
+     * This method is a static guest list with defined guests and their backstories.
+     */
     private static void intializeGuestList() {
         guestList.add(new Guest("Amelia and Don", "21", "None", "None", "A young couple celebrating their three-year anniversary on a sweet 'bae-cation.' They’re energetic, affectionate, and looking for a cozy getaway spot to make memories.", "Amelia is a bit of a clean freak. You might be called frequently for room cleaning.", 2));
         guestList.add(new Guest("Sally", "58", "2 cats (one is rowdy and has sharp claws!)", "None", "Freshly single after a messy divorce, Sally is treating herself to luxury... and so are her mischievous cats. One of them has quite a temper and very sharp claws, so prepare for a wild stay!", "Risk having furniture damaged and extra room cleaning. Might hear complaints from certain guests…", 1));
@@ -31,14 +38,25 @@ public class GameLoop{
         guestList.add(new Guest("Charity and Damien", "24", "None", "None", "Charity caught Damien cheating three days before their vacation but STILL decided to go since they bought the tickets for their stay. The worst part is that Damien cheated on her with Charity’s sister, Casey. The two seem to be really distant but Damien seems to have some hope that this vacation will make Charity forgive him. Charity, however, seems to be insisting on separate beds.", "You and staff will have to keep a close eye on him. It would be advised not to leave him alone near the front desk or security office.", 1));
         guestList.add(new Guest("Laurel", "17", "None", "Expecting!", "Laurel is young and pregnant! She seems to be extremely stressed out and wants to stay at your hotel for the night after her boyfriend Matt (17) didn’t defend her during last night’s family dinner at his place. His mom told Laurel her tuna noodle casserole was horrendous in front of the whole family. To add salt to the burn, Matt’s mom spat out the food right into the casserole pot. This girl is in DEEP need of some alone time. Also, screw Matt!", "What if her water breaks during her stay?", 1));
         guestList.add(new Guest("Alex, Deuce, and Renee", "29, 32, 35", "None", "None (though they talk about it a lot)", "This group is a polyamorous throuple trying to have a relaxing weekend together. However, it's clear this relationship isn’t exactly in harmony. Alex and Renee have been together for years, and Deuce is the obvious “new addition”. Alex is overly accommodating, Deuce feels left out, and Renee keeps passive-aggressively correcting them both in front of strangers.", "Occasionally very affectionate in public, but then starts arguing the next moment. Staff never quite know which version of them they’ll get that day.", 3));
-        guestList.add(new Guest("Mrs. Winifred ", "87", "None", "4 estranged kids, not staying with her", "Mrs. Delacroix is the kind of old woman who insists on being called “Madam” and leaves behind the scent of lavender and menthol wherever she goes. She is a former stage actress and self-proclaimed psychic who speaks in metaphors, always wears silk gloves, and carries a weathered scrapbook labeled 'My Secrets.'", "She claims to be writing her memoirs and constantly drops disturbing family anecdotes like, 'That was the year Charles set the garden on fire to get attention'.", 1));
+        guestList.add(new Guest("Mrs. Winifred", "87", "None", "4 estranged kids, not staying with her", "Mrs. Delacroix is the kind of old woman who insists on being called “Madam” and leaves behind the scent of lavender and menthol wherever she goes. She is a former stage actress and self-proclaimed psychic who speaks in metaphors, always wears silk gloves, and carries a weathered scrapbook labeled 'My Secrets.'", "She claims to be writing her memoirs and constantly drops disturbing family anecdotes like, 'That was the year Charles set the garden on fire to get attention'.", 1));
         guestList.add(new Guest("Tom and Aicha", "33", "None", "None", "Tom and Aisha are a down-to-earth married couple celebrating their anniversary with a quiet weekend away. They’re friendly, respectful, and genuinely appreciative of every small gesture.", "Almost no trouble. Occasionally asks for recommendations for local bakeries or hiking trails.", 2));
     }
 
+    /**
+     * Gets a random guest from the current guest list.
+     *
+     * @return a randomly selected Guest object from the list.
+     */
     private static Guest getRandomGuest() {
-        return guestList.get(rand.nextInt(guestList.size()));
+        return guestList.get(random.nextInt(guestList.size()));
     }
     
+    /**
+     * The main method that starts the game.
+     * Handles user input, game setup, and the main game loop involving guest arrivals, tasks, and checkouts.
+     *
+     * @param args command-line arguments.
+     */
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
         intializeGuestList();
@@ -59,10 +77,9 @@ public class GameLoop{
         System.out.print("\nNazifa: You're about to become the newest Hotel Manager! But first, we need to know: ");
         System.out.print("What’s your name, Manager? ");
         String playerName = userInput.nextLine(); //collect the person's name
-        Player player = new Player(playerName); 
-        System.out.println(); //do i need this ask caitlyn n nazifa
+        System.out.println(); 
 
-        System.out.println("Shahrin: Nice to meet you, " + player.getName() + "!");
+        System.out.println("Shahrin: Nice to meet you, " + playerName + "!");
         System.out.println("We are your hosts Shahrin, Caitlyn, and Nazifa.");
         System.out.println("\n******************");
         System.out.println("Nazifa: Before we open the doors, what would you like to name your hotel?");
@@ -80,23 +97,20 @@ public class GameLoop{
         System.out.println("Caitlyn: And if you fail three tasks, say bye bye to your new job.");
         System.out.println("Good luck! 🍀");
         System.out.println("******************");
+
+        System.out.print("\nPress Enter to continue ");
+        userInput.nextLine();
         
         
         //Main game loop 
         do {
-            // Check if all guests have been welcomed (WIN CONDITION)
-             if (guestList.isEmpty()) {
-                 System.out.println("\nAll guests have been welcomed!");
-                 //System.out.println("Congratulations " + player.getName() + "! You've successfully managed " + hotelName + "!");
-                 break; // Exit the loop (player wins)
-             } 
-
             //Guests arriving 
             System.out.println("\n ----GUEST ARRIVAL----");
-            int maxGuests = Math.min(3, guestList.size()); // don't request more than what exists
-            int numNewGuests = rand.nextInt(maxGuests) + 1;
-            ArrayList<Guest> arrivingGuests = new ArrayList<>(); 
+            int maxGuests = Math.min(3, guestList.size()); 
+            int numNewGuests = random.nextInt(maxGuests) + 1; 
+            ArrayList<Guest> arrivingGuests = new ArrayList<>();  //guests that have arrived 
 
+            //guests arrive 1-3 randomly 
             for (int i = 0; i < numNewGuests; i++) {
                 Guest newGuest = getRandomGuest(); 
                 System.out.println("\nA guest has arrived:");
@@ -104,6 +118,7 @@ public class GameLoop{
                 System.out.println("Would you like to accept them into your hotel? (yes/no)");
                 String accept = userInput.nextLine().toLowerCase();
 
+                //if guest is accepted 
                 if (accept.equals("yes")) {
                     arrivingGuests.add(newGuest);
                     guestList.remove(newGuest); //removes the guest from initial list 
@@ -115,15 +130,23 @@ public class GameLoop{
                         System.out.println("Party size: " + newGuest.partySize + "\n");
                         hotel.displayRooms();
                         System.out.print("\nEnter room number to assign them: ");
-                        int roomNumber = Integer.parseInt(userInput.nextLine());
+                        System.out.println("\n(If you have accepted a guest and do not have space for them enter - 0)");
+                        int roomNumber = Integer.parseInt(userInput.nextLine()); //read the input int
 
-                        assigned = hotel.checkInGuest(newGuest, roomNumber);
-
-                        if (!assigned) {
-                            System.out.println("This room will not work for your guests. Please try again.");
+                        //if they don't enter 0 check-in to room, else turn them away 
+                        if (roomNumber > 0) {
+                            assigned = hotel.checkInGuest(newGuest, roomNumber);
+                            if (!assigned) {
+                                System.out.println("This room will not work for your guests. Please try again.");
+                                System.out.print("\nPress Enter to continue ");
+                                userInput.nextLine();
+                            }
+                        } else {
+                            System.out.println(newGuest.name + " has been turned away.");
+                            break;
                         }
                     }                          
-                } else {
+                } else { //if guests was initially turned away
                     System.out.println(newGuest.name + " has been turned away.");
                 }
             }
@@ -138,45 +161,45 @@ public class GameLoop{
                 failedTasks += 1; 
             }
 
-            //Guests leaving (create a counter when guests leave increase it )
-            System.out.println("----GUEST CHECKOUT----");
-            ArrayList<Integer> occupiedRoomNumbers = new ArrayList<>();
+            //Guests leaving 
+            System.out.println("\n----GUEST CHECKOUT----");
 
-            occupiedRoomNumbers.clear();
+            ArrayList<Integer> occupiedRoomNumbers = new ArrayList<>(); //array list of occupied rooms 
 
-            for (int i = 0; i<hotel.getRooms().size(); i++) {
-                if (hotel.getRooms().get(i).isOccupied()) {
-                    occupiedRoomNumbers.add(i + 1);
-                }
-
-                if (!occupiedRoomNumbers.isEmpty()) {
-                    int randomIndex = rand.nextInt(occupiedRoomNumbers.size()); 
-                    int randomRoomNumber = occupiedRoomNumbers.get(randomIndex);
-
-                    hotel.checkOutGuest(randomRoomNumber);
-                    nGuestsLeft += 1;
-                    break;
+            for (Room room : hotel.getRooms()) { //checks each room in the room array list 
+                if(room.isOccupied) { //if the room is occupied add it to the new list 
+                    occupiedRoomNumbers.add(room.roomNumber);
                 }
             }
 
+            if (occupiedRoomNumbers.isEmpty()) {
+                System.out.println("No guests to check out.");
+            } else { //check out 1-2 guests 
+                int maxCheckouts = Math.min(2, occupiedRoomNumbers.size());
+                int numToCheckOut = 1 + random.nextInt(maxCheckouts);
 
-
-        } while (failedTasks < 3);
-
-        System.out.println("You call yourself a manager, " + player.getName() + "? You've failed 3 tasks. Consider yourself fired!");
-        System.out.println("GAME OVER.");
-
+                for (int i=0; i<numToCheckOut; i++) {
+                    int randomIndex = random.nextInt(occupiedRoomNumbers.size());
+                    int randomRoomNumber = occupiedRoomNumbers.remove(randomIndex);
+                    hotel.checkOutGuest(randomRoomNumber); //check out a random room number 
+                    nGuestsLeft += 1; //add to count 
+                }
+                System.out.println("They had a pleasant time at " + hotelName + " and will be sure to come back soon!");
+                
+                System.out.print("\nPress Enter to continue ");
+                userInput.nextLine(); 
+            }
+            
+        } while (failedTasks < 3 && nGuestsLeft < 10);
 
         userInput.close();
 
-        System.out.println();
-
-        //possible stopping conditions after loop ends
-        if (guestList.isEmpty()) {
-            System.out.println("Congratulations " + player.getName() + "! You've successfully managed " + hotelName + "!");
-        } else {//userResponse.equals("LOSE")
-             System.out.println("You call yourself a manager, " + player.getName() + "? You've failed 3 tasks. Consider yourself fired!");
-             System.out.println("GAME OVER.");
+        //end results win/lose
+        if (failedTasks == 3) { //lose
+            System.out.println("\nYou call yourself a manager, " + playerName + "? You've failed 3 tasks. Consider yourself fired!");
+            System.out.println("GAME OVER.");
+        } else {//win
+            System.out.println("\nCONGRATULATIONS " + playerName + "!! You've successfully managed " + hotelName + " for the day!");
         }
     }
 }

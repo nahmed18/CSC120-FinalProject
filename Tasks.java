@@ -5,8 +5,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Arrays; 
 
+/**
+ * Encapsulates tasks performed by either player or requested by guests
+ * Each Task has a name, type (guest or hotel), and completion status
+ * Tasks can be started, completed, or failed based on if mini-game is won
+ */
 public class Tasks {
 
+    //Task attributes 
     String name;
     String type; // is it a task that the hotel needs or a guest is requesting for
     boolean isCompleted;
@@ -15,16 +21,29 @@ public class Tasks {
     private static Scanner scanner = new Scanner(System.in);
     private static Random random = new Random();
 
+    /**
+     * Constructs a new Tasks instance with given name and type
+     * Initially task is marked incomplete
+     * @param name the name or description of task
+     * @param type the category of task ("guest" or "hotel")
+     */
     public Tasks(String name, String type) {
         this.name = name;
         this.type = type;
         this.isCompleted = false;
     }
 
+    /**
+     * Displays task details and its current status 
+     */
     public void displayTask() {
         System.out.println("📋 Task: " + name + " | Type: " + type + " | Status: " + (isCompleted ? "Completed" : "Incomplete"));
     }
 
+    /**
+     * Maarks task as completed and ends in-progress status
+     * @return true upon completion of task
+     */
     public boolean completeTask() {
         this.isCompleted = true;
         taskInProgress = false;
@@ -32,12 +51,19 @@ public class Tasks {
         return true;
     }
 
+    /**
+     * Marks task as failed and ends in-progress status
+     */
     public void failTask() {
         this.isCompleted = false;
         taskInProgress = false;
         System.out.println("❌ Task Failed: " + name);
     }
 
+    /**
+     * Begins task, allowing only one in-progress at a time
+     * then plays mini-game to determine success of task
+     */
     public void startTask() {
         if (taskInProgress) {
             System.out.println("⚠️ You must finish your current task before you take on another one."); 
@@ -57,6 +83,11 @@ public class Tasks {
         }
     }
 
+    /**
+     * Selects random task name based on specified task type
+     * @param type either "guest" or "hotel" to pick from corresponding lists
+     * @return new Tasks object with a random name of given type
+     */
     public static Tasks getRandomTask(String type) {
         ArrayList<String> guestTasks = new ArrayList<>(Arrays.asList(
                 "Clean the room", "Replace lost keycard", "Bring extra towels"));
@@ -71,15 +102,24 @@ public class Tasks {
         return new Tasks(taskName, type);
     }
 
+    /**
+     * Chooses and plays one of the mini-games: Whack-a-Mole, Rock-Paper-Scissors, or Unscramble Word
+     * @return true if player wins mini-game; false otherwise
+     */
     private boolean playMiniGame() {
-        int gameType = random.nextInt(2); // 0 or 1
-        if (gameType == 0) {
-            return playWhackAMole();
-        } else {
-            return playRockPaperScissors();
+        int gameType = random.nextInt(3); // either 0, 1 or 2
+        switch (gameType) {
+            case 0: return playWhackAMole();
+            case 1: return playRockPaperScissors();
+            case 2: return playUnscrambleWord();
+            default: return false;
         }
     }
 
+    /**
+     * Plays a Whack-a-Mole-style game: user must identify odd emoji out of a shuffled list
+     * @return true if correct index is chosen; false otherwise
+     */
     private boolean playWhackAMole() {
         String[] emojis = {"🐶", "🐶", "🐶", "🐱", "🐶", "🐶"};
         int oddIndex = 3;
@@ -103,6 +143,10 @@ public class Tasks {
         return guess - 1 == oddIndex;
     }
 
+    /**
+     * Plays best-of-three Rock-Paper-Scissors game against system
+     * @return true if player wins two rounds first; false otherwise
+     */
     private boolean playRockPaperScissors() {
         String[] choices = {"rock", "paper", "scissors"};
         int playerWins = 0;
@@ -142,18 +186,57 @@ public class Tasks {
             return false;
         }
     }
-//THANK YOU SO MUCH CAITLYN !!!!!
-    public static void main(String[] args) {
-        Tasks task = Tasks.getRandomTask("guest");
-        task.displayTask();
-        task.startTask();
 
-        Tasks task2 = Tasks.getRandomTask("hotel");
-        task2.displayTask();
-        task2.startTask();
+    /**
+     * Plays Unscramble-Word game where user must reorder scrambled letters to create correct word
+     * @return true if guess matches original word; false otherwise
+     */
+    private boolean playUnscrambleWord() {
+    String[] words = {"hotel", "guest", "lobby", "suite", "rooms", "vacation", "cafe", "library", "unscramble"};
+    String original = words[random.nextInt(words.length)];
+
+    // Scramble the word
+    List<Character> letters = new ArrayList<>();
+    for (char c : original.toCharArray()) {
+        letters.add(c);
+    }
+    Collections.shuffle(letters);
+
+    StringBuilder scrambled = new StringBuilder();
+    for (char c : letters) {
+        scrambled.append(c);
     }
 
+    System.out.println("Unscramble the word: " + scrambled);
 
+    int attempts = 0;
+    while (attempts < 2) {
+        System.out.print("Your guess (" + (2 - attempts) + " attempt(s) left): ");
+        String guess = scanner.next().toLowerCase();
+
+        if (guess.equals(original)) {
+            System.out.println("Correct!");
+            return true;
+        } else {
+            System.out.println("Incorrect.");
+            attempts++;
+        }
+    }
+
+    System.out.println("You've used all attempts. The correct word was: " + original);
+    return false;
+}
+
+
+    public static void main(String[] args) {
+        // Tasks task = Tasks.getRandomTask("guest");
+        // task.displayTask();
+        // task.startTask();
+
+        // Tasks task2 = Tasks.getRandomTask("hotel");
+        // task2.displayTask();
+        // task2.startTask();
+    }
 
 
 }
